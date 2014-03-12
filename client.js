@@ -9,11 +9,12 @@ socket.on('connect', function() {
 socket.on('updatechat', function(username, data) {
   $('#conversation').append('<b>' + username + ':<b> ' + data + '<br>');
 })
+
 // lsitener for server emitting 'updateusers'
 socket.on('updateusers', function(data) {
   $('#users').empty();
   $.each(data, function(key, value) {
-    $('#users').append('<div>' + key + '</div>');
+    $('#users').append('<div>' + value + '</div>');
   });
 });
 

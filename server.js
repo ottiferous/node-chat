@@ -13,10 +13,6 @@ app.get('/client.js', function(request, response) {
   response.sendfile(__dirname + '/client.js');
 });
 
-//app.get('/socket.io.js', function(request, response) {
-//  response.sendfile(__dirname + '/public/javascripts/socket.io.js');
-//});
-
 // global variable to hold the usernames of every client
 var usernames = {};
 
@@ -37,7 +33,7 @@ io.sockets.on('connection', function(socket) {
   socket.on('adduser', function(username) {
     socket.username = username;
     usernames[username] = username;
-    socket.emit('updatechat', 'SERVER', 'you have connected');
+    socket.emit('updatechat', 'SERVER', ' connected');
     socket.broadcast.emit('updatechat', 'SERVER', username + ' has connected');
     io.sockets.emit('updateusers', username);
   });
