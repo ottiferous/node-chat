@@ -35,7 +35,7 @@ io.sockets.on('connection', function(socket) {
     usernames[username] = username;
     socket.emit('updatechat', 'SERVER', ' connected');
     socket.broadcast.emit('updatechat', 'SERVER', username + ' has connected');
-    io.sockets.emit('updateusers', username);
+    io.sockets.emit('updateusers', usernames);
   });
 
   // listen for client to 'disconnect'
