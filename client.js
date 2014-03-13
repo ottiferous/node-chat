@@ -10,12 +10,9 @@ socket.on('updatechat', function(username, data) {
   $('#conversation').append('<b>' + username + ':<b> ' + data + '<br>');
 })
 
-// lsitener for server emitting 'updateusers'
+// listener for server emitting 'updateusers'
 socket.on('updateusers', function(data) {
-  $('#users').empty();
-  $.each(data, function(key, value) {
-    $('#users').append('<div>' + value + '</div>');
-  });
+  $('#users').prepend('<p>' + data + '</p>');
 });
 
 // on load of index.html
