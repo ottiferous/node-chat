@@ -32,7 +32,9 @@ io.sockets.on('connection', function(socket) {
   // listen for client to 'adduser'
   socket.on('adduser', function(username) {
     socket.username = username;
-    usernames[username] = username;
+    if(username != null) {
+      usernames[username] = username;
+    }
     socket.emit('updatechat', 'SERVER', ' connected');
     socket.broadcast.emit('updatechat', 'SERVER', username + ' has connected');
     io.sockets.emit('updateusers', usernames);
