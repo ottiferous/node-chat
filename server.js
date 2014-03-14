@@ -41,7 +41,7 @@ io.sockets.on('connection', function(socket) {
   });
 
   // listen for client to 'disconnect'
-  socket.on('disconect', function() {
+  socket.on('disconnect', function() {
     delete usernames[socket.username];
     io.sockets.emit('updateusers', usernames);
     socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
