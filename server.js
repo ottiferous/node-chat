@@ -16,11 +16,6 @@ app.get('/client.js', function(request, response) {
 // global variable to hold the usernames of every client
 var usernames = {};
 
-/*
- * this section handles all the possible events once a 'connection' has been
- * established to our socket.io server. At a minimum we will need to handle a
- * user joining, sending a chat, and disconnecting from our server.
-*/
 io.sockets.on('connection', function(socket) {
   console.log("User connected");
 
@@ -32,9 +27,6 @@ io.sockets.on('connection', function(socket) {
   // listen for client to 'adduser'
   socket.on('adduser', function(username) {
     socket.username = username;
-    if(username != null) {
-      usernames[username] = username;
-    }
     socket.emit('updatechat', 'SERVER', ' connected');
     socket.broadcast.emit('updatechat', 'SERVER', username + ' has connected');
     io.sockets.emit('updateusers', usernames);

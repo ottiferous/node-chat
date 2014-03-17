@@ -1,3 +1,12 @@
+/*
+ * These lines should create an IP:port variable to use in the 'naming'
+ * of a given connection. On the server side they work - once - and never
+ * update after that first time. On client side they are always null.
+ */
+//var ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address.address;
+//var port = socket.handshake.address.port;
+//var username = ip + ":" + port;
+
 var socket = io.connect('http://localhost');
 
 // on connect get username with anonymous callback
