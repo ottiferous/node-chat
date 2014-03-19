@@ -11,7 +11,7 @@ var socket = io.connect('http://localhost');
 
 // on connect get username with anonymous callback
 socket.on('connect', function() {
-  socket.emit('adduser', prompt("Handle: "));
+  socket.emit('adduser', socket.socket.sessionid);
 });
 
 // listener for server emitting 'updatechat'
