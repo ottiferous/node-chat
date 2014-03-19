@@ -7,7 +7,6 @@ server.listen(8080);
 // Handle routing for app
 app.get('/', function(request, response) {
   response.sendfile(__dirname + '/index.html');
-  console.log(request.socket.address());
 });
 
 app.get('/client.js', function(request, response) {
@@ -15,10 +14,12 @@ app.get('/client.js', function(request, response) {
 });
 
 // global variable to hold the usernames of every client
-var usernames = {};
+var usernames = [];
 
+// socket.hadnshake.address.address = IP address
+// socket.handshake.address.port    = Port number
 io.sockets.on('connection', function(socket) {
-  var room = socket.handshake.address;
+  var room = socket.handshake.address.address;
   console.log("User connected from: " + room);
 
   socket.join(room);
@@ -29,8 +30,9 @@ io.sockets.on('connection', function(socket) {
   });
 
   // listen for client to 'adduser'
-  socket.on('adduser', function(username) {
-    socket.username = username;
+  socket.on('adduser', function() {
+    var username = socket.handshake.address.port
+    usernames.push(username);
     socket.emit('updatechat', 'SERVER', ' connected');
     socket.broadcast.to(room).emit('updatechat', 'SERVER', username + ' has connected');
     io.sockets.in(room).emit('updateusers', usernames);

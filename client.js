@@ -11,7 +11,7 @@ var socket = io.connect('http://localhost');
 
 // on connect get username with anonymous callback
 socket.on('connect', function() {
-  socket.emit('adduser', socket.socket.sessionid);
+  socket.emit('adduser');
 });
 
 // listener for server emitting 'updatechat'
@@ -22,7 +22,7 @@ socket.on('updatechat', function(username, data) {
 // listener for server emitting 'updateusers'
 socket.on('updateusers', function(data) {
   $('#users').empty();
-  Object.keys(data).forEach( function(name) {
+  data.map( function(name) {
     $('#users').append('<p>' + name + '</p>');
   });
 });
